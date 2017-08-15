@@ -1,8 +1,8 @@
 import template from "./pie.html"
 import * as d3 from 'd3';
 var margin = 20,
-    width = 960,
-    height = 500 - .5 - margin,
+    width = 400,
+    height = 200 - .5 - margin,
     color = d3.interpolateRgb("#f77", "#77f");
 
 class pieDirective {
@@ -22,8 +22,8 @@ class pieDirective {
                 const n = 7;
                 console.log('values from directive: ', values);
 
-                var width = 960,
-                    height = 500,
+                var width = 400,
+                    height = 250,
                     radius = Math.min(width, height) / 2;
                 var color = d3.scaleOrdinal(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
 
@@ -37,7 +37,7 @@ class pieDirective {
                         return d.population;
                     });
 
-                var svg = d3.select("body").append("svg")
+                var svg = d3.select("pie").append("svg")
                     .attr("width", width)
                     .attr("height", height)
                     .append("g")

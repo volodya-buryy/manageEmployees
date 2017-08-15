@@ -1,9 +1,24 @@
-<navbar></navbar>
-<header>
-  <hero></hero>
-</header>
-<main>
-  <div>
-    <h1>Found in {{ $ctrl.name }}.html</h1>
-  </div>
-</main>
+<navbar model="$ctrl.model"></navbar>
+<div>
+	<div class="table">
+		<div class="title">
+			<ul>
+				<li>Name</li>
+				<li>Age</li>
+				<li>Skill</li>
+				<li>Level</li>
+				<li></li>
+			</ul>
+		</div>
+		<div class="user-info" ng-repeat="item in $ctrl.model">
+			<ul>
+				<li>{{item.name}}</li>
+				<li>{{item.age}}</li>
+				<li>{{item.skill}}</li>
+				<li>{{item.level}}</li>
+				<li>+ -</li>
+			</ul>
+
+		</div>
+	</div>
+</div>
