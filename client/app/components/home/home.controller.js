@@ -22,7 +22,7 @@ class HomeController {
 			},
 			{
 				name: "Dou",
-				age: "32",
+				age: "3",
 				skill: "js",
 				level: "2"
 			},

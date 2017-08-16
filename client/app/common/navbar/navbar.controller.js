@@ -3,33 +3,41 @@ import * as d3 from 'd3';
 class NavbarController {
 	constructor(User, $state) {
 		this.name = 'navbar';
-		console.log(User.D3(),d3, "D3")
+		//console.log(User.D3(),d3, "D3")
 		this.state = $state;
 	}
 	about(obj){
 		console.log(obj)
-		let ageArr = [];
-		for(let i = 0; i < obj.length; i++){
-			for(let j = 0; j <= ageArr.length; j++){
-				//console.log(ageArr[j].age == obj[i].age, ageArr[j].age, obj[i].age)
-				console.log(ageArr)
+		
+		function parseForPieChart(obj, prop){
+			let ageArr = [];
+			for(let i = 0; i < obj.length; i++){
+				var seen = false;
 				if(ageArr.length > 0 ){
-					if(ageArr[j].age == obj[i].age){
-						ageArr[j].sum ++
-					}else{
-						ageArr.push({age: obj[i].age, sum: 1})
+					for(let j = 0; j != ageArr.length; ++j){
+						//console.log(ageArr, obj[i], ageArr[j].age, obj[i].age)
+						if(ageArr[j].title === obj[i][prop]){
+							seen = true
+							ageArr[j].sum++
+						}					
 					}
+					if(!seen) ageArr.push({title: obj[i][prop], sum: 1})
+	
 				}else{
-					ageArr.push({age: obj[i].age, sum: 1})
+					ageArr.push({title: obj[i][prop], sum: 1})
 				}
+	
 			}
-
+			return ageArr
 		}
-		console.log(ageArr)
+
+		let age = parseForPieChart(obj, "age");
+		let skill = parseForPieChart(obj, "skill");
+		let level = parseForPieChart(obj, "level");
+
+		console.log(age)
 		this.state.go('about',  {
-			model: [{
-				age: ageArr
-			}]
+			model: [age, skill, level]
 		});
 	}
 }

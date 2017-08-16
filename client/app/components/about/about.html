@@ -1,7 +1,5 @@
 <navbar></navbar>
-<div>
-	<!-- <pie values="$ctrl.model[0].age"></pie>
-	<pie values="$ctrl.model[1].level"></pie> -->
-	<pie values="$ctrl.val[0].values"></pie>
+<div ng-repeat="item in $ctrl.model" style="display: flex;justify-content: center;">
+	<pie values="item"></pie>
 </div>
 

@@ -34,7 +34,7 @@ class pieDirective {
                 var pie = d3.pie()
                     .sort(null)
                     .value(function(d) {
-                        return d.population;
+                        return d.sum;
                     });
 
                 var svg = d3.select("pie").append("svg")
@@ -45,7 +45,7 @@ class pieDirective {
 
 
                     values.forEach(function(d) {
-                        d.population = +d.population;
+                        d.sum = +d.sum;
                     });
 
                     var g = svg.selectAll(".arc")
@@ -56,8 +56,7 @@ class pieDirective {
                     g.append("path")
                         .attr("d", arc)
                         .style("fill", function(d) {
-                            console.log(color(d.data.age), "color")
-                            return color(d.data.age);
+                            return color(d.data.title);
                         });
 
                     g.append("text")
@@ -67,7 +66,7 @@ class pieDirective {
                         .attr("dy", ".35em")
                         .style("text-anchor", "middle")
                         .text(function(d) {
-                            return d.data.age;
+                            return d.data.title;
                         });
 
             }
