@@ -1,6 +1,7 @@
 class HomeController {
-	constructor() {
+	constructor($state) {
 		this.name = 'home';
+		this.$state = $state;
 		this.model = [
 			{
 				name: "John",
@@ -41,6 +42,28 @@ class HomeController {
 		let objKey = Object.keys(this.model[index])[key];
 		this.model[index][objKey] = item;
 	}
-};
 
+	findByText(findText){
+		if(!findText) {
+			this.$state.reload();
+			return
+		}
+
+		let a = this.model.filter(item => {
+			for(let key in item){
+				let itemParse = item[key].toString()
+
+				if(itemParse.indexOf(findText) == 0){
+					return item
+				}else{
+					continue
+				}
+			}
+		})
+
+		this.model = a
+		console.log(a);
+	}
+};
+HomeController.$inject = ['$state']
 export default HomeController;
