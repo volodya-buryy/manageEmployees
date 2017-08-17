@@ -1,10 +1,11 @@
 <navbar model="$ctrl.model"></navbar>
 
-<div>
-	<input type="text" ng-model="findTextModel" ng-change="$ctrl.findByText(findTextModel)" style="float: right;margin: 40px;">
+<div class="search">
+	<i class="material-icons">search</i>
+	<input type="text" placeholder="Search" ng-model="findTextModel" ng-change="$ctrl.findByText(findTextModel)">
 </div>
 
-<div class="container-fluid" style="margin-top: 10px;width: 80%;margin: auto;">
+<div class="container-fluid">
 
 	<div class="table-row wrapper header">
 		<div class="wrapper text-4">

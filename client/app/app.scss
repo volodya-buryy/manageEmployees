@@ -1,8 +1,10 @@
 @import "common/common";
 
 .app {
+	width: 65vw;
+	margin: auto;
 	height: 100vh;
-	background-color: $lightBgColor;
+	background-color: #eaeaea;
 }
 
 .material-icons {
