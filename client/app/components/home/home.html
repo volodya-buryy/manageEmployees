@@ -1,7 +1,7 @@
 <navbar model="$ctrl.model"></navbar>
 
 <div class="container-fluid" style="margin-top: 10px;width: 80%;margin: auto;">
-	
+
 	<div class="table-row wrapper header">
 		<div class="wrapper text-4">
 			<div class="wrapper text-2">
@@ -15,28 +15,45 @@
 	</div>
 
 
-	<div class="table-row wrapper" ng-repeat="item in $ctrl.model" ng-init="int = []">
+	<div class="table-row wrapper" ng-repeat="value in $ctrl.model" ng-init="$ctrl.int = []">
 		<div class="wrapper text-4">
 			<div class="wrapper text-2">
+
 				<div class="text">
-					<span ng-hide="int[$index]">{{item.name}}</span>
-					<input type="text" ng-show="int[$index]" ng-value="item.name">
+					<span ng-hide="$ctrl.int[$index]">{{value.name}}</span>
+					<input type="text" ng-show="$ctrl.int[$index]" ng-value="value.name" ng-model="name" ng-blur="$ctrl.save($index, 0, name)">
 				</div>
-				<div class="text">{{item.age}}</div>
-				<div class="text">{{item.skill}}</div>
+
 				<div class="text">
-					<span ng-repeat="i in [].constructor(item.level) track by $index">
-						<i class="material-icons">star</i>
+					<span ng-hide="$ctrl.int[$index]">{{value.age}}</span>
+					<input type="number" ng-show="$ctrl.int[$index]" ng-value="value.age" ng-model="age" ng-blur="$ctrl.save($index, 1, age)">
+				</div>
+
+				<div class="text">
+					<span ng-hide="$ctrl.int[$index]">{{value.skill}}</span>
+					<input type="text" ng-show="$ctrl.int[$index]" ng-value="value.skill" ng-model="skill" ng-blur="$ctrl.save($index, 2, skill)">
+				</div>
+
+				<div class="text">
+					<div ng-show="$ctrl.int[$index]">
+						<input type="number" style="width: 100%;" min="1" max="3" ng-show="$ctrl.int[$index]" ng-value="value.level" ng-model="level" ng-blur="$ctrl.save($index, 3, level)">
+					</div>
+					<span ng-hide="$ctrl.int[$index]">
+						<span ng-repeat="i in [].constructor(value.level) track by $index">
+							<i class="material-icons">star</i>
+						</span>
 					</span>
 				</div>
+
 				<div class="text">
-					<i class="material-icons" ng-click="int[$index] = true" style="cursor: pointer;">create</i>
+					<i class="material-icons" ng-click="!$ctrl.int[$index] ? $ctrl.int[$index] = true : $ctrl.int[$index] = false" style="cursor: pointer;">create</i>
 					<i class="material-icons" ng-click="$ctrl.removeItem($index)" style="cursor: pointer;">clear</i>
 				</div>
-			</div>					
+
+			</div>
 		</div>
-	</div>	 
-	
-	
-	
+	</div>
+
+
+
 </div>

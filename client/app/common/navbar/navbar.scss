@@ -1,26 +1,32 @@
 @import '../common';
 
 .navbar {
-  height: 6.5rem;
-  background-color: $primaryColor;
-  padding: 1rem;  
-  display: flex;
-  justify-content: center;
-  align-items: baseline;
+	height: 6.5rem;
+	background-color: $primaryColor;
+	padding: 1rem;
+	display: flex;
+	justify-content: center;
+	align-items: baseline;
 
 
-  .nav-links,
-  .logo {
-    display: inline-block;
-    margin:5px;
-  }
+	.nav-links,
+	.logo {
+		display: inline-block;
+		margin:5px;
+	}
 
-  .logo {
-    color: $lightTextColor;
-  }
+	.logo {
+		color: $lightTextColor;
+	}
 
-  .nav-links span {
-    color: $lightTextColor;
-    font-size: 1.6rem;
-  }
+	.nav-links span {
+		color: $lightTextColor;
+		font-size: 1.6rem;
+	}
+}
+.underline{
+	border-bottom: 2px solid white;
+}
+a{
+	text-decoration: none;
 }

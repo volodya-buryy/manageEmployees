@@ -35,7 +35,11 @@ class HomeController {
 
 	editItem(index){
 		this.editEvent = true
-		console.log(this.model[index]);
+		console.log(index);
+	}
+	save(index, key, item){
+		let objKey = Object.keys(this.model[index])[key];
+		this.model[index][objKey] = item;
 	}
 };
 
