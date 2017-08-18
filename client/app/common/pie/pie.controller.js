@@ -66,9 +66,9 @@ class pieDirective {
                         });
                     g.append("text")
                         .attr("dy", ".35em")
-                        .attr("x", 0)
                         .attr("y", -120)
                         .style("text-anchor", "middle")
+                        .style("font-size", "24px")
                         .text(scope.title);
             }
         })

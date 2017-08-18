@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 
 class NavbarController {
-	constructor(User, $state, $stateParams) {
+	constructor($state, $stateParams) {
 		this.state = $state;
 	}
 	about(obj){
@@ -36,5 +36,5 @@ class NavbarController {
 		});
 	}
 }
-NavbarController.$inject = ['User', "$state"];
+NavbarController.$inject = ["$state"];
 export default NavbarController;
