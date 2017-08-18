@@ -1,6 +1,5 @@
 class AboutController {
 	constructor($stateParams) {
-		console.log($stateParams)
 		this.model = $stateParams.model;
 		this.name = 'about';
 
