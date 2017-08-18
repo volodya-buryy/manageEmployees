@@ -1,5 +1,7 @@
 <navbar></navbar>
-<div ng-repeat="item in $ctrl.model" style="display: flex;justify-content: center;">
-	<pie values="item"></pie>
+<div ng-repeat="item in $ctrl.model" 
+	ng-init="title = ['byAge', 'bySkill', 'byLevel']"  
+	class="pie-wrapper">
+	<pie values="item" title="title[$index]"></pie>
 </div>
 

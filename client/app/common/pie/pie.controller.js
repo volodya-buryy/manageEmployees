@@ -1,17 +1,13 @@
 import template from "./pie.html"
 import * as d3 from 'd3';
-var margin = 20,
-    width = 400,
-    height = 200 - .5 - margin,
-    color = d3.interpolateRgb("#f77", "#77f");
 
 class pieDirective {
     /*@ngInject*/
     constructor($interval) {
-        //this.template = template;
         this.restrict = 'E';
         this.scope = {
-            values: '='
+            values: '=',
+            title: '='
         }
         this.$interval = $interval;
     }
@@ -20,11 +16,11 @@ class pieDirective {
         scope.$watch('values', function(values) {
             if(values) {
                 const n = 7;
-                console.log('values from directive: ', values);
+                console.log('values from directive: ', values, scope.title);
 
-                var width = 400,
-                    height = 250,
-                    radius = Math.min(width, height) / 2;
+                var width = 200,
+                    height = 320,
+                    radius = Math.min(width) / 2;
                 var color = d3.scaleOrdinal(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
 
                 var arc = d3.arc()
@@ -51,7 +47,7 @@ class pieDirective {
                     var g = svg.selectAll(".arc")
                         .data(pie(values))
                         .enter().append("g")
-                        .attr("class", "arc");
+                        .attr("class", "arc");                        
 
                     g.append("path")
                         .attr("d", arc)
@@ -68,7 +64,12 @@ class pieDirective {
                         .text(function(d) {
                             return d.data.title;
                         });
-
+                    g.append("text")
+                        .attr("dy", ".35em")
+                        .attr("x", 0)
+                        .attr("y", -120)
+                        .style("text-anchor", "middle")
+                        .text(scope.title);
             }
         })
     }
