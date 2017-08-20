@@ -3,16 +3,16 @@ import * as d3 from 'd3';
 
 class pieDirective {
     /*@ngInject*/
-    constructor($interval) {
+    constructor() {
         this.restrict = 'E';
+        this.template = template,
         this.scope = {
             values: '=',
             title: '='
         }
-        this.$interval = $interval;
     }
     link(scope, element, attrs) {
-
+        
         scope.$watch('values', function(values) {
             if(values) {
                 const n = 7;

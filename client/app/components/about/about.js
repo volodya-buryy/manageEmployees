@@ -9,20 +9,30 @@ let aboutModule = angular.module('about', [
 ]).controller('aboutController', aboutController)
 
 .config(($stateProvider, $urlRouterProvider) => {
-  "ngInject";
+	"ngInject";
 
-  $urlRouterProvider.otherwise('/');
+	$urlRouterProvider.otherwise('/');
 
-  $stateProvider
-    .state('about', {
-      url: '/about',
-      params: {
-        model: null
-      },
-      template: about,
-      controller: 'aboutController',
-      controllerAs: '$ctrl'
-    });
+	$stateProvider
+		.state('about', {
+			url: '/about',
+			params: {
+				model: null
+			},
+			template: about,
+			controller: 'aboutController',
+			controllerAs: '$ctrl',
+			// resolve: {
+			// 	modelObj: function($state, $stateParams){
+			// 		console.log($stateParams, '!!!')
+			// 		if(!$stateParams.model){
+			// 			$state.go('home')
+			// 		}else{
+			// 			return $stateParams.model
+			// 		}
+			// 	}
+			// },
+		});
 })
 
 .name;

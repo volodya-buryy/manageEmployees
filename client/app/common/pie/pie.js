@@ -4,7 +4,7 @@ import pieDirective from "./pie.controller"
 
 let pieModule = angular.module('pie', [uiRouter])
 
-.directive('pie',  ()=>new pieDirective)
+.directive('pie',  () => new pieDirective)
 
 .name;
 
