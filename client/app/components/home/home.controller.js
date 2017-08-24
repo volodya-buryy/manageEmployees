@@ -1,40 +1,14 @@
 class HomeController {
-	constructor($state) {
+	constructor($state, UserServise) {
+		this.UserServise = UserServise;
 		this.name = 'home';
 		this.$state = $state;
-		this.model = [
-			{
-				name: "John Doe",
-				age: "23",
-				skill: "js",
-				level: 3
-			},
-			{
-				name: "John Doe",
-				age: "32",
-				skill: "php",
-				level: 2
-			},
-			{
-				name: "John Doe",
-				age: "18",
-				skill: "C++",
-				level: 1
-			},
-			{
-				name: "John Doe",
-				age: "90",
-				skill: "ASM",
-				level: 3
-			},
-			{
-				name: "John Doe",
-				age: "19",
-				skill: "C++",
-				level: 1
-			},
-		];
+		
 	};
+
+	$onInit(){
+		this.model = this.UserServise.get();
+	}
 
 	removeItem(index) {
 		this.model.splice(index, 1);
@@ -71,5 +45,5 @@ class HomeController {
 		console.log(a);
 	}
 };
-HomeController.$inject = ['$state']
+HomeController.$inject = ['$state', 'UserServise']
 export default HomeController;

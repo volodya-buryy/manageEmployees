@@ -1,7 +1,11 @@
 class AboutController {
 	constructor($stateParams) {
-		this.model = $stateParams.model;
+		this.stateParams = $stateParams;	
 		this.name = 'about';
+  }
+  $onInit(){
+	this.model = this.stateParams.model;	
+	console.log(this.model,  'MMModel');
   }
 }
 AboutController.$inject = ['$stateParams']
