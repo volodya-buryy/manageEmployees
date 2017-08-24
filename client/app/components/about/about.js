@@ -22,16 +22,16 @@ let aboutModule = angular.module('about', [
 			template: about,
 			controller: 'aboutController',
 			controllerAs: '$ctrl',
-			// resolve: {
-			// 	modelObj: function($state, $stateParams){
-			// 		console.log($stateParams, '!!!')
-			// 		if(!$stateParams.model){
-			// 			$state.go('home')
-			// 		}else{
-			// 			return $stateParams.model
-			// 		}
-			// 	}
-			// },
+			resolve: {
+				modelObj: function($state, $stateParams){
+					console.log($stateParams, '!!!')
+					if(!$stateParams.model){
+						$state.go('home')
+					}else{
+						return $stateParams.model
+					}
+				}
+			},
 		});
 })
 

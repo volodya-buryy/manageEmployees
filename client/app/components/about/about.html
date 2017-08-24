@@ -2,7 +2,5 @@
 <div ng-repeat="item in $ctrl.model track by $index" 
 	ng-init="title = ['byAge', 'bySkill', 'byLevel']"  
 	class="pie-wrapper">
-	{{ item | json}}
 	<pie values="item" title="title[$index]"></pie>
 </div>
-

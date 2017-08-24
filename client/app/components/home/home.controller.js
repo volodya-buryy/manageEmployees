@@ -1,9 +1,8 @@
 class HomeController {
 	constructor($state, UserServise) {
-		this.UserServise = UserServise
+		this.UserServise = UserServise;
 		this.name = 'home';
 		this.$state = $state;
-		console.log(this.UserServise.get())
 		
 	};
 

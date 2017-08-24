@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 
 class NavbarController {
-	constructor($state, $stateParams) {
+	constructor($state) {
 		this.state = $state;
 	}
 	about(obj){
