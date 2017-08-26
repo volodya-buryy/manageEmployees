@@ -7,6 +7,7 @@ class HomeController {
 
 	$onInit(){
 		this.model = this.UserServise.get();
+		this.int = [];
 	}
 
 	removeItem(index) {
@@ -17,7 +18,7 @@ class HomeController {
 		this.editEvent = true
 	
 	}
-	
+
 	save(index, key, item){
 		let objKey = Object.keys(this.model[index])[key];
 		this.model[index][objKey] = item;
@@ -31,7 +32,7 @@ class HomeController {
 			return
 		}
 
-		let a = this.model.filter(item => {
+		return this. model = this.model.filter(item => {
 			for(let key in item){
 				let itemParse = item[key].toString().toLowerCase();
 
@@ -42,8 +43,10 @@ class HomeController {
 				}
 			}
 		})
+	}
 
-		this.model = a
+	addItem(){
+		alert()
 	}
 };
 HomeController.$inject = ['$state', 'UserServise']
