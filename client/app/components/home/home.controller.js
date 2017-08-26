@@ -1,7 +1,6 @@
 class HomeController {
 	constructor($state, UserServise) {
 		this.UserServise = UserServise;
-		this.name = 'home';
 		this.$state = $state;
 		
 	};
@@ -16,24 +15,27 @@ class HomeController {
 
 	editItem(index){
 		this.editEvent = true
-		console.log(index);
+	
 	}
+	
 	save(index, key, item){
 		let objKey = Object.keys(this.model[index])[key];
 		this.model[index][objKey] = item;
 	}
 
 	findByText(findText){
+		findText = findText.toLowerCase();
+
 		if(!findText) {
-			this.$state.reload();
+			this.model = this.UserServise.get();
 			return
 		}
 
 		let a = this.model.filter(item => {
 			for(let key in item){
-				let itemParse = item[key].toString()
+				let itemParse = item[key].toString().toLowerCase();
 
-				if(itemParse.indexOf(findText) == 0){
+				if(itemParse.indexOf(findText) > -1){
 					return item
 				}else{
 					continue
@@ -42,7 +44,6 @@ class HomeController {
 		})
 
 		this.model = a
-		console.log(a);
 	}
 };
 HomeController.$inject = ['$state', 'UserServise']

@@ -1,6 +1,5 @@
 class UserService {
     constructor() {
-        console.log('Ser')
         this.model = [
 			{
 				name: "John Doe",

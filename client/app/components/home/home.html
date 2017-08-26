@@ -51,7 +51,7 @@
 				</div>
 
 				<div class="text">
-					<i class="material-icons" ng-click="!$ctrl.int[$index] ? $ctrl.int[$index] = true : $ctrl.int[$index] = false" style="cursor: pointer;">create</i>
+					<i class="material-icons" ng-click="$ctrl.int[$index] = !$ctrl.int[$index]" style="cursor: pointer;">create</i>
 					<i class="material-icons" ng-click="$ctrl.removeItem($index)" style="cursor: pointer;">clear</i>
 				</div>
 
