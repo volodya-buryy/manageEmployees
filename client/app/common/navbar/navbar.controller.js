@@ -1,4 +1,3 @@
-import * as d3 from 'd3';
 
 class NavbarController {
 	constructor($state) {
@@ -8,23 +7,27 @@ class NavbarController {
 
 		function parseForPieChart(obj, prop){
 			let ageArr = [];
-			for(let i = 0; i < obj.length; i++){
+			obj.forEach(obj => {
+
 				var seen = false;
 				if(ageArr.length > 0 ){
-					for(let j = 0; j != ageArr.length; ++j){
-						if(ageArr[j].title === obj[i][prop]){
+
+					ageArr.forEach(item => {
+						if(item.title === obj[prop]){
 							seen = true
-							ageArr[j].sum++
+							item.sum++
 						}
-					}
-					if(!seen) ageArr.push({title: obj[i][prop], sum: 1})
+					});
+					
+					if(!seen) ageArr.push({title: obj[prop], sum: 1})
 
 				}else{
-					ageArr.push({title: obj[i][prop], sum: 1})
+					ageArr.push({title: obj[prop], sum: 1})
 				}
 
-			}
-			return ageArr
+			});
+
+			return ageArr; 
 		}
 
 		let age = parseForPieChart(obj, "age");
