@@ -8,6 +8,7 @@ class HomeController {
 	$onInit(){
 		this.model = this.UserServise.get();
 		this.int = [];
+		this.showAddItemModal = false;
 	}
 
 	removeItem(index) {
@@ -46,7 +47,7 @@ class HomeController {
 	}
 
 	addItem(){
-		alert()
+		this.showAddItemModal = true;
 	}
 };
 HomeController.$inject = ['$state', 'UserServise']
