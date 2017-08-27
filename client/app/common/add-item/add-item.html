@@ -1,6 +1,6 @@
 <section style="position: absolute;background-color: rgba(0,0,0,0.4);width: 65vw;height: 100%;top: 0;">
     Hello MZFC
-    <div style="
+    <form style="
     display: flex;
     justify-content: space-around;
     align-items: baseline;
@@ -33,5 +33,6 @@
             <label>Level</label>
             <input type="number" min="1" max="3"/>
         </div>
-    </div>
+        <button ng-click="$ctrl.submit()">Submit</button>
+    </form>
 </section>

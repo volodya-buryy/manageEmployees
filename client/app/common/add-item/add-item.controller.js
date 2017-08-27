@@ -1,9 +1,16 @@
 
 class addItemController {
-	constructor($state) {
-        this.state = $state;
-        console.log('!!!!!!!!!!')
+	constructor(UserServise) {
+		this.UserServise = UserServise;
+	}
+	submit(){
+		this.UserServise.set({
+			name: "John Doe",
+			age: "19",
+			skill: "C++",
+			level: 1
+		})
 	}
 }
-addItemController.$inject = ["$state"];
+addItemController.$inject = ["UserServise"];
 export default addItemController;
