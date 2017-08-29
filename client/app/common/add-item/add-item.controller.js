@@ -1,16 +1,22 @@
 
 class addItemController {
-	constructor(UserServise) {
+	constructor(UserServise, $rootScope) {
 		this.UserServise = UserServise;
+		this.$rootScope = $rootScope;
 	}
-	submit(){
+	submit(name, age, skill, level){
 		this.UserServise.set({
-			name: "John Doe",
-			age: "19",
-			skill: "C++",
-			level: 1
+			name: name,
+			age: age,
+			skill: skill,
+			level: level
 		})
+		this.close();
+	}
+
+	close(){
+		this.$rootScope.$emit('close', 'close');
 	}
 }
-addItemController.$inject = ["UserServise"];
+addItemController.$inject = ["UserServise", '$rootScope'];
 export default addItemController;

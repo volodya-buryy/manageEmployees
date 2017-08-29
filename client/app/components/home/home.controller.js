@@ -1,14 +1,17 @@
 class HomeController {
-	constructor($state, UserServise) {
+	constructor($state, UserServise, $rootScope) {
 		this.UserServise = UserServise;
 		this.$state = $state;
-		
+		this.$rootScope = $rootScope;
 	};
 
 	$onInit(){
 		this.model = this.UserServise.get();
 		this.int = [];
 		this.showAddItemModal = false;
+		this.$rootScope.$on('close', (data => {
+			this.showAddItemModal = false;
+		}))
 	}
 
 	removeItem(index) {
@@ -17,7 +20,7 @@ class HomeController {
 
 	editItem(index){
 		this.editEvent = true
-	
+
 	}
 
 	save(index, key, item){
@@ -50,5 +53,5 @@ class HomeController {
 		this.showAddItemModal = true;
 	}
 };
-HomeController.$inject = ['$state', 'UserServise']
+HomeController.$inject = ['$state', 'UserServise', '$rootScope']
 export default HomeController;
