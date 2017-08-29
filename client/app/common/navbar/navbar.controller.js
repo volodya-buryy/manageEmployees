@@ -1,9 +1,12 @@
 
 class NavbarController {
-	constructor($state) {
+	constructor($state, UserServise) {
 		this.state = $state;
+		this.UserServise = UserServise;
 	}
-	about(obj){
+	about(){
+
+		let obj = this.UserServise.get();
 
 		function parseForPieChart(obj, prop){
 			let ageArr = [];
@@ -18,7 +21,7 @@ class NavbarController {
 							item.sum++
 						}
 					});
-					
+
 					if(!seen) ageArr.push({title: obj[prop], sum: 1})
 
 				}else{
@@ -27,7 +30,7 @@ class NavbarController {
 
 			});
 
-			return ageArr; 
+			return ageArr;
 		}
 
 		let age = parseForPieChart(obj, "age");
@@ -39,5 +42,5 @@ class NavbarController {
 		});
 	}
 }
-NavbarController.$inject = ["$state"];
+NavbarController.$inject = ["$state", 'UserServise'];
 export default NavbarController;

@@ -1,6 +1,5 @@
-<navbar></navbar>
-<div ng-repeat="item in $ctrl.model track by $index" 
-	ng-init="title = ['byAge', 'bySkill', 'byLevel']"  
+<div ng-repeat="item in $ctrl.model track by $index"
+	ng-init="title = ['byAge', 'bySkill', 'byLevel']"
 	class="pie-wrapper">
 	<pie values="item" title="title[$index]"></pie>
 </div>
