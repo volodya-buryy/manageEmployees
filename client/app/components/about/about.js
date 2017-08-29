@@ -24,7 +24,6 @@ let aboutModule = angular.module('about', [
 			controllerAs: '$ctrl',
 			resolve: {
 				modelObj: function($state, $stateParams){
-					console.log($stateParams, '!!!')
 					if(!$stateParams.model){
 						$state.go('home')
 					}else{

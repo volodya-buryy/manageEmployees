@@ -6,27 +6,36 @@ class HomeController {
 	};
 
 	$onInit(){
-		this.model = this.UserServise.get();
-		this.int = [];
+		this.model = this.UserServise.get(); // get list from service
+		this.int = []; // init arr for edit event
 		this.showAddItemModal = false;
-		this.$rootScope.$on('close', (data => {
+		this.$rootScope.$on('close', (data => { // listen event if need to close modal
 			this.showAddItemModal = false;
 		}))
 	}
+	/*
+	remove user from te list
+	*/
 
 	removeItem(index) {
 		this.model.splice(index, 1);
 	}
+	/*
+	edit user info
+	*/
 
 	editItem(index){
 		this.editEvent = true
-
 	}
 
 	save(index, key, item){
 		let objKey = Object.keys(this.model[index])[key];
 		this.model[index][objKey] = item;
 	}
+
+	/*
+	find in list of user, by name, age, skill, level
+	*/
 
 	findByText(findText){
 		findText = findText.toLowerCase();
@@ -48,6 +57,10 @@ class HomeController {
 			}
 		})
 	}
+
+	/*
+	add new user to the list
+	*/
 
 	addItem(){
 		this.showAddItemModal = true;
