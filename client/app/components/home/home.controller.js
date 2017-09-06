@@ -7,7 +7,6 @@ class HomeController {
 
 	$onInit(){
 		this.model = this.UserServise.get(); // get list from service
-		this.int = []; // init arr for edit event
 		this.showAddItemModal = false;
 		this.$rootScope.$on('close', (data => { // listen event if need to close modal
 			this.showAddItemModal = false;
@@ -68,3 +67,5 @@ class HomeController {
 };
 HomeController.$inject = ['$state', 'UserServise', '$rootScope']
 export default HomeController;
+
+

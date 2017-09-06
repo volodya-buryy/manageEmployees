@@ -1,29 +1,31 @@
 <section class="add-item">
 
     <form class="add-item-form" ng-submit="$ctrl.submit(name, age, skill, level)">
+        <div class="add-item-block">
 
-        <div class="input-block">
-            <label>Name</label>
-            <input type="text" ng-model="name" required/>
+            <div class="input-block">
+                <label>Name</label>
+                <input type="text" ng-model="name" required/>
+            </div>
+
+            <div class="input-block">
+                <label>Age</label>
+                <input type="number" min="1" max="100" ng-model="age" required/>
+            </div>
+
+            <div class="input-block">
+                <label>Skill</label>
+                <input type="text" ng-model="skill" required/>
+            </div>
+
+            <div class="input-block">
+                <label>Level</label>
+                <input type="number" min="1" max="3" ng-model="level" required/>
+            </div>
+
+            <button type="submit">Submit</button>
+
+            <i class="material-icons" ng-click="$ctrl.close()">clear</i>
         </div>
-
-        <div class="input-block">
-            <label>Age</label>
-            <input type="number" min="1" max="100" ng-model="age" required/>
-        </div>
-
-        <div class="input-block">
-            <label>Skill</label>
-            <input type="text" ng-model="skill" required/>
-        </div>
-
-        <div class="input-block">
-            <label>Level</label>
-            <input type="number" min="1" max="3" ng-model="level" required/>
-        </div>
-
-        <button type="submit">Submit</button>
-
-        <i class="material-icons" ng-click="$ctrl.close()">clear</i>
     </form>
 </section>
