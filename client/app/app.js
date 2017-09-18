@@ -6,16 +6,36 @@ import AppComponent from './app.component';
 import 'normalize.css';
 import * as d3 from "d3";
 
-angular.module('app', [
+let app = angular.module('app', [
     uiRouter,
     Common,
     Components
-  ])
-  .config(($locationProvider) => {
+])
+app.config(($locationProvider) => {
     "ngInject";
     // @see: https://github.com/angular-ui/ui-router/wiki/Frequently-Asked-Questions
     // #how-to-configure-your-server-to-work-with-html5mode
-    $locationProvider.html5Mode(true).hashPrefix('!');
+	$locationProvider.html5Mode(true).hashPrefix('!');
+	
   })
+app.run(($rootScope) => {
+	console.log($rootScope)
 
-  .component('app', AppComponent);
+    let request = indexedDB.open("ManageEmployees", 5);
+
+    request.onupgradeneeded = function(e) {
+        var thisDB = e.target.result;
+ 
+        if(!thisDB.objectStoreNames.contains("userInfo")) {
+            console.log("I need to make the note objectstore");
+            var objectStore = thisDB.createObjectStore("userInfo", { keyPath: "id", autoIncrement:true });  
+            objectStore.createIndex("text", "text", { unique: false });
+        }
+    }
+ 
+	request.onsuccess = function(e){
+		$rootScope.$emit('test', e.target.result)
+	}
+
+})
+app.component('app', AppComponent);

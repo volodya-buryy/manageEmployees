@@ -1,75 +1,61 @@
+import _ from 'lodash';
 class UserService {
-    constructor() {
-        this.model = [
-			{
-				name: "John Doe",
-				age: "23",
-				skill: "js",
-				level: 3,
-				ssn: "444-44-4444"
-			},
-			{
-				name: "John Doe",
-				age: "32",
-				skill: "php",
-				level: 2,
-				ssn: "444-44-4445"
-			},
-			{
-				name: "John Doe",
-				age: "18",
-				skill: "C++",
-				level: 1,
-				ssn: "444-44-4446"
-			},
-			{
-				name: "John Doe",
-				age: "90",
-				skill: "ASM",
-				level: 3,
-				ssn: "444-44-44447"
-			},
-			{
-				name: "John Doe",
-				age: "19",
-				skill: "C++",
-				level: 1,
-				ssn: "444-44-4448"
-			},
-		];
-    }
+    constructor($rootScope) {
+		this.$rootScope = $rootScope;
+		let that = this;	
+		this.model = [];
+		$rootScope.$on("test", (a,b) =>{
+			console.log(b, this)
+			this.db = b;
+
+			var trans = b.transaction(["userInfo"], "readwrite");
+			var store = trans.objectStore("userInfo");
+		 
+			var request = store.getAll();
+		 
+			request.onsuccess = (e) => {
+				console.log(e.target.result)
+				e.target.result.forEach((element) => {
+					this.model.push(element);
+				});
+			}
+			request.onerror = function(err){
+				console.log(err);
+			}
+		})			
+	}
+
     get(){
-        return this.model
+		return this.model;		
     }
 
     set(item){
 		this.model.push(item);
         return this.model
 	}
-	pushToDB(){
-		//TODO: example how to use indexedDB in angularjs -> http://embed.plnkr.co/ip6owK/
-		var db;
-		let request = indexedDB.open("ManageEmployees", 2);
+	pushToDB(name, age, skill, level){
+		console.log(this.db);
+		var trans = this.db.transaction(["userInfo"], "readwrite");
+		var store = trans.objectStore("userInfo");
 
-		request.onerror = function(event) {
-			console.log(event.target.errorCode, '<<<---Error Code')
-		  	alert("Why didn't you allow my web app to use IndexedDB?!");
+		var request = store.add({
+			"id": Date.parse(new Date()),
+			"name": name,
+			"age": age,
+			"skill": skill,
+			"level": level,
+		});
+
+		request.onsuccess = function (e) {
+			console.log(e)
+			return e
 		};
 
-		request.onsuccess = function(event) {
-			db = event.target.result;
-			var objectStore = db.createObjectStore('user_info_list', { keyPath: "ssn" });
-			objectStore.createIndex("name", "name", { unique: false });
-
-			objectStore.transaction.oncomplete = function(event) {
-				var customerObjectStore = db.transaction("user_info_list", "readwrite").objectStore("user_info_list");
-				for (var i in this.model) {
-					customerObjectStore.add(this.model[i]);
-				}
-			};
+		request.onerror = function (e) {
+			console.log(e);
 		};
 	}
-
+	
 }
-
+UserService.$inject = ['$rootScope']
 export default UserService;

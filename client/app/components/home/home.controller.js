@@ -1,16 +1,31 @@
+import _ from 'lodash';
 class HomeController {
-	constructor($state, UserServise, $rootScope) {
+	constructor($state, UserServise, $rootScope, $scope) {
 		this.UserServise = UserServise;
 		this.$state = $state;
 		this.$rootScope = $rootScope;
+		this.model = [];
+		$scope.$watch(() => this.model, (newValue) => {
+			console.log(newValue[0])
+			let g = newValue[0]
+			g.forEach((element) => {
+				console.log(element)
+			});
+			console.log(g)
+			//this.model.push(newValue[0][0])
+			
+			console.log(this.model)
+		});
+		
 	};
 
 	$onInit(){
-		this.model = this.UserServise.get(); // get list from service
+		this.model.push(this.UserServise.get()); // get list from service
+		console.log(this.model, '1')
 		this.showAddItemModal = false;
 		this.$rootScope.$on('close', (data => { // listen event if need to close modal
 			this.showAddItemModal = false;
-		}))
+		}))		
 	}
 	/*
 	remove user from te list
@@ -65,7 +80,7 @@ class HomeController {
 		this.showAddItemModal = true;
 	}
 };
-HomeController.$inject = ['$state', 'UserServise', '$rootScope']
+HomeController.$inject = ['$state', 'UserServise', '$rootScope', '$scope']
 export default HomeController;
 
 

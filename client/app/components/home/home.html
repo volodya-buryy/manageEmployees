@@ -17,8 +17,10 @@
 		</div>
 	</div>
 
+	{{ $ctrl.model.length }}
 
 	<div class="table-row wrapper" ng-repeat="value in $ctrl.model track by $index">
+		{{value}}
 		<div class="wrapper text-4">
 			<div class="wrapper text-2" ng-switch="$ctrl.edit[$index]">
 

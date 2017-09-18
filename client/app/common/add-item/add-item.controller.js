@@ -5,12 +5,7 @@ class addItemController {
 		this.$rootScope = $rootScope;
 	}
 	submit(name, age, skill, level){
-		this.UserServise.set({
-			name: name,
-			age: age,
-			skill: skill,
-			level: level
-		})
+		this.UserServise.pushToDB(name, age, skill, level)
 		this.close();
 	}
 
