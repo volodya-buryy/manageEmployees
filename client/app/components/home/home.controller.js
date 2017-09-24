@@ -35,6 +35,11 @@ class HomeController {
 	save(index, key, item){
 		let objKey = Object.keys(this.model[index])[key + 1];
 		this.model[index][objKey] = item;
+		this.UserServise.updateUserInfo(this.model[index]).then(res => {
+			console.log(res);
+		}, err => {
+			console.log(err);
+		})
 	}
 
 	/*

@@ -22,12 +22,10 @@ class UserService {
 			request.onsuccess = (e) => {				
 				let a = e.target.result
 				this.model = [];
-				console.log(e.target.result, a, '12312312')
 				a.forEach((element) => {
 					this.model.push(element);
 				});
 				deferred.resolve(a)
-				console.log(this.model)
 			}
 			request.onerror = function(err){
 				console.log(err);
@@ -66,6 +64,27 @@ class UserService {
 		request.onerror = (e) => {
 			console.log(e);
 		};
+	}
+
+	updateUserInfo(item){
+		let deferred = this.$q.defer();
+
+		var trans = this.db.transaction(["userInfo"], "readwrite");
+		var store = trans.objectStore("userInfo");
+
+		var request = store.put(item);
+
+		request.onsuccess = (e) => {
+			console.log(e)
+			this.model.push(request)
+			return e
+		};
+
+		request.onerror = (e) => {
+			console.log(e);
+		};
+
+		return deferred.promise;
 	}
 	
 }
