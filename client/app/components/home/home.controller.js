@@ -5,27 +5,17 @@ class HomeController {
 		this.$state = $state;
 		this.$rootScope = $rootScope;
 		this.model = [];
-		$scope.$watch(() => this.model, (newValue) => {
-			console.log(newValue[0])
-			let g = newValue[0]
-			g.forEach((element) => {
-				console.log(element)
-			});
-			console.log(g)
-			//this.model.push(newValue[0][0])
-			
-			console.log(this.model)
-		});
 		
 	};
 
 	$onInit(){
-		this.model.push(this.UserServise.get()); // get list from service
-		console.log(this.model, '1')
+		this.getUserInfo();
+		console.log(this.model, 'INIT')
 		this.showAddItemModal = false;
 		this.$rootScope.$on('close', (data => { // listen event if need to close modal
 			this.showAddItemModal = false;
-		}))		
+		}))
+				
 	}
 	/*
 	remove user from te list
@@ -43,7 +33,7 @@ class HomeController {
 	}
 
 	save(index, key, item){
-		let objKey = Object.keys(this.model[index])[key];
+		let objKey = Object.keys(this.model[index])[key + 1];
 		this.model[index][objKey] = item;
 	}
 
@@ -55,7 +45,7 @@ class HomeController {
 		findText = findText.toLowerCase();
 
 		if(!findText) {
-			this.model = this.UserServise.get();
+			this.getUserInfo();
 			return
 		}
 
@@ -78,6 +68,16 @@ class HomeController {
 
 	addItem(){
 		this.showAddItemModal = true;
+	}
+
+	getUserInfo(){
+		this.model = [];
+		// get list from service
+		this.UserServise.get().then(res => {
+			res.forEach((element) => {
+				this.model.push(element)	
+			});
+		}); 
 	}
 };
 HomeController.$inject = ['$state', 'UserServise', '$rootScope', '$scope']

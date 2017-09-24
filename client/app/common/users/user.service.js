@@ -1,32 +1,44 @@
 import _ from 'lodash';
 class UserService {
-    constructor($rootScope) {
+    constructor($rootScope, $q) {
+		this.$q = $q;
 		this.$rootScope = $rootScope;
 		let that = this;	
 		this.model = [];
-		$rootScope.$on("test", (a,b) =>{
-			console.log(b, this)
-			this.db = b;
+		this.db = null;		
+	}
 
-			var trans = b.transaction(["userInfo"], "readwrite");
+    get(){		
+		let deferred  = this.$q.defer();
+
+		this.$rootScope.indexedDbRes().then(db => {
+			this.db = db; 
+
+			var trans = db.transaction(["userInfo"], "readwrite");
 			var store = trans.objectStore("userInfo");
-		 
+			
 			var request = store.getAll();
-		 
-			request.onsuccess = (e) => {
-				console.log(e.target.result)
-				e.target.result.forEach((element) => {
+			
+			request.onsuccess = (e) => {				
+				let a = e.target.result
+				this.model = [];
+				console.log(e.target.result, a, '12312312')
+				a.forEach((element) => {
 					this.model.push(element);
 				});
+				deferred.resolve(a)
+				console.log(this.model)
 			}
 			request.onerror = function(err){
 				console.log(err);
+				deferred.reject('OOps')
 			}
-		})			
-	}
-
-    get(){
-		return this.model;		
+		}, err => {
+			console.log(err);
+			deferred.reject(err)
+		});		
+				
+		return deferred.promise;		
     }
 
     set(item){
@@ -34,7 +46,6 @@ class UserService {
         return this.model
 	}
 	pushToDB(name, age, skill, level){
-		console.log(this.db);
 		var trans = this.db.transaction(["userInfo"], "readwrite");
 		var store = trans.objectStore("userInfo");
 
@@ -46,16 +57,17 @@ class UserService {
 			"level": level,
 		});
 
-		request.onsuccess = function (e) {
+		request.onsuccess = (e) => {
 			console.log(e)
+			this.model.push(request)
 			return e
 		};
 
-		request.onerror = function (e) {
+		request.onerror = (e) => {
 			console.log(e);
 		};
 	}
 	
 }
-UserService.$inject = ['$rootScope']
+UserService.$inject = ['$rootScope', '$q']
 export default UserService;

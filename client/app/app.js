@@ -18,24 +18,34 @@ app.config(($locationProvider) => {
 	$locationProvider.html5Mode(true).hashPrefix('!');
 	
   })
-app.run(($rootScope) => {
-	console.log($rootScope)
+app.run(($rootScope, $q) => {
+    $rootScope.indexedDbRes = indexedDbRes
+    function indexedDbRes(){
+        console.log()
+        let deferred  = $q.defer();
 
-    let request = indexedDB.open("ManageEmployees", 5);
-
-    request.onupgradeneeded = function(e) {
-        var thisDB = e.target.result;
- 
-        if(!thisDB.objectStoreNames.contains("userInfo")) {
-            console.log("I need to make the note objectstore");
-            var objectStore = thisDB.createObjectStore("userInfo", { keyPath: "id", autoIncrement:true });  
-            objectStore.createIndex("text", "text", { unique: false });
+        let request = indexedDB.open("ManageEmployees", 5);
+        let indexedDbRes = null;
+    
+        request.onupgradeneeded = function(e) {
+            var thisDB = e.target.result;
+     
+            if(!thisDB.objectStoreNames.contains("userInfo")) {
+                console.log("I need to make the note objectstore");
+                var objectStore = thisDB.createObjectStore("userInfo", { keyPath: "id", autoIncrement:true });  
+                objectStore.createIndex("text", "text", { unique: false });
+            }
         }
-    }
- 
-	request.onsuccess = function(e){
-		$rootScope.$emit('test', e.target.result)
-	}
+     
+        request.onsuccess = function(e){
+            deferred.resolve(e.target.result);
+        }
 
+        request.onerror = function(err){
+            deferred.reject(err);
+        }
+
+        return deferred.promise;
+    }
 })
 app.component('app', AppComponent);
